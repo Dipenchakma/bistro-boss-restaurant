@@ -4,11 +4,18 @@ import Cover from "../../Shared/Cover";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { useState } from "react";
-import FoodCard from "../../Components/FoodCard/FoodCard";
+
+import OrderTab from "./OrderTab";
+import { useParams } from "react-router-dom";
 
 const Order = () => {
-  const [tabIndex, setTabIndex] = useState(0);
+  const categories = ['salad', 'pizza', 'soup', 'desserts', 'drinks']
+  const {category} = useParams()
+  const initialIndex = categories.indexOf(category)
+  const [tabIndex, setTabIndex] = useState(initialIndex);
   const [menu] = UseMenu();
+
+
   const salads = menu.filter((item) => item.category === "salad");
   const pizzas = menu.filter((item) => item.category === "pizza");
   const soups = menu.filter((item) => item.category === "soup");
@@ -30,43 +37,13 @@ const Order = () => {
           <Tab>Desserts</Tab>
           <Tab>Drinks</Tab>
         </TabList>
-        <TabPanel>
-          <div className="grid md:grid-cols-3  justify-center">
-            {salads.map((item) => (
-              <FoodCard key={item._id} item={item}></FoodCard>
-            ))}
-          </div>
-        </TabPanel>
-        <TabPanel>
-          {" "}
-          <div className="grid md:grid-cols-3 justify-center">
-            {pizzas.map((item) => (
-              <FoodCard key={item._id} item={item}></FoodCard>
-            ))}
-          </div>
-        </TabPanel>
-        <TabPanel>
-          <div className="grid md:grid-cols-3  justify-center">
-            {soups.map((item) => (
-              <FoodCard key={item._id} item={item}></FoodCard>
-            ))}
-          </div>
-        </TabPanel>
-        <TabPanel>
-          <div className="grid md:grid-cols-3 justify-center">
-            {desserts.map((item) => (
-              <FoodCard key={item._id} item={item}></FoodCard>
-            ))}
-          </div>
-        </TabPanel>
-        <TabPanel>
-          <div className="grid md:grid-cols-3 justify-center items-center">
-            {drinks.map((item) => (
-              <FoodCard key={item._id} item={item}></FoodCard>
-            ))}
-          </div>
-        </TabPanel>
-      
+        <TabPanel> <OrderTab items={salads}></OrderTab></TabPanel>
+        <TabPanel> <OrderTab items={pizzas}></OrderTab></TabPanel>
+        <TabPanel> <OrderTab items={soups}></OrderTab></TabPanel>
+        <TabPanel> <OrderTab items={desserts}></OrderTab></TabPanel>
+        <TabPanel> <OrderTab items={drinks}></OrderTab></TabPanel>
+     
+     
       </Tabs>
     </div>
   );

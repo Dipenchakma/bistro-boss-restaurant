@@ -6,13 +6,13 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Rating } from "@smastrom/react-rating";
-import '@smastrom/react-rating/style.css'
+import "@smastrom/react-rating/style.css";
 
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch("review.json")
+    fetch("http://localhost:5002/reviews")
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, []);
@@ -28,7 +28,11 @@ const Testimonials = () => {
         {reviews.map((review) => (
           <SwiperSlide key={review._id}>
             <div className="flex flex-col items-center mx-24 space-y-4 mb-20">
-              <Rating style={{ maxWidth: 180 }} value={review.rating} readOnly />
+              <Rating
+                style={{ maxWidth: 180 }}
+                value={review.rating}
+                readOnly
+              />
               <p>{review.details}</p>
               <h1 className="text-2xl text-orange-400">{review.name}</h1>
             </div>
