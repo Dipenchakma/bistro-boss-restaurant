@@ -1,4 +1,5 @@
 import { FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { axiosSecure } from "../../Components/Hooks/UseAxiosSecure";
 import UseCarts from "../../Components/Hooks/UseCarts";
@@ -36,7 +37,11 @@ const Cart = () => {
       <div className="flex justify-evenly mb-8">
         <h1 className="text-4xl">Items : {cart.length}</h1>
         <h2 className="text-4xl">total Price: {totalPrice}</h2>
-        <button className="btn btn-primary">Pay</button>
+
+ {
+  cart.length ? <Link to='/dashboard/payment'> <button className="btn btn-primary">Pay</button></Link>
+  :  <button disabled className="btn btn-primary">Pay</button>
+ }     
       </div>
       <div className="overflow-x-auto">
         <table className="table w-full">

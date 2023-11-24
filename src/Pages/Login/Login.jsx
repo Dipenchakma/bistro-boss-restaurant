@@ -8,6 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import SocialLogin from "../Social login/SocialLogin";
 const Login = () => {
   const [disable, setDisable] = useState(true);
   const { login } = useContext(AuthContext);
@@ -104,6 +105,7 @@ const Login = () => {
                 <button disabled={disable} className="btn btn-primary">
                   Login
                 </button>
+              <SocialLogin></SocialLogin>
               </div>
             </form>
             <p className="pl-8 mb-5">
